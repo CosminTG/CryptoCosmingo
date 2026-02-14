@@ -1,0 +1,6 @@
+@CryptoCosmingo_HostAddress = http://localhost:5202
+
+GET {{CryptoCosmingo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
