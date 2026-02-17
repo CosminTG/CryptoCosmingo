@@ -1,5 +1,4 @@
 ﻿using CryptoCosmingo.DTOs;
-using CryptoCosmingo.Models;
 using CryptoCosmingo.Repositories;
 
 namespace CryptoCosmingo.Services
@@ -13,25 +12,24 @@ namespace CryptoCosmingo.Services
             _repo = repo;
         }
 
-        public async Task<List<SymbolDTO>> GetAllAsync()
+        public async Task<List<SymbolDTO>> GetCryptoSymbolAsync(string cryptosymbol)
         {
-            var symbols = await _repo.GetAllAsync();
+            var symbols_service = await _repo.GetCryptoSymbolAsyncDB(cryptosymbol);
 
-            return symbols.Select(x => new SymbolDTO
+            return symbols_service.Select(x => new SymbolDTO
             {
-                Id = x.Id,
+                //Id = x.Id,
                 Name = x.Name
             }).ToList();
         }
 
-        public async Task CreateAsync(CreateSymbolDTO dto)
+        public async task createasync(createsymboldto dto)
         {
-            var symbol = new Symbol
+            var symbol = new symbol
             {
-                Name = dto.Name
+                name = dto.name
             };
-
-            await _repo.CreateAsync(symbol);
+            await _repo.createasync(symbol);
         }
     }
 }

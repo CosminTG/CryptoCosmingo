@@ -1,25 +1,25 @@
 ﻿using CryptoCosmingo.Models;
-using CryptoCosmingo.Repositories;
+using CryptoCosmingo.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoCosmingo.Controllers
 {
     [ApiController]
-    [Route("api/symbols")]
+    [Route("api/symbols/")]
     public class SymbolsController : ControllerBase
     {
-        private readonly ISymbolRepository _repo;
+        private readonly ISymbolService _repo;
 
-        public SymbolsController(ISymbolRepository repo)
+        public SymbolsController(ISymbolService repo)
         {
             _repo = repo;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{cryptosymbol}")]
+        public async Task<IActionResult> GetCryptoSymbol(string cryptosymbol)
         {
-            var symbols = await _repo.GetAllAsync();
-            return Ok(symbols);
+            var symbols_controller = await _repo.GetCryptoSymbolAsync(cryptosymbol);
+            return Ok(symbols_controller);
         }
 
         [HttpPost]

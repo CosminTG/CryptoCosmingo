@@ -13,18 +13,17 @@ namespace CryptoCosmingo.Repositories
             _connectionString = dbConfig.ConnectionString;
         }
 
-        public async Task<List<Symbol>> GetAllAsync()
+        public async Task<List<Symbol>> GetCryptoSymbolAsyncDB(string cryptosymbol)
         {
-            var list = new List<Symbol>();
-
             using var connection = new SqliteConnection(_connectionString);
             await connection.OpenAsync();
 
             var command = connection.CreateCommand();
-            command.CommandText = "SELECT Id, Name FROM Symbols;";
+            command.CommandText = "SELECT * FROM Symbols WHERE Name = $namesymbol;";
+            command.Parameters.AddWithValue("$namesymbol", cryptosymbol);
 
             using var reader = await command.ExecuteReaderAsync();
-
+            var list = new List<Symbol>();
             while (await reader.ReadAsync())
             {
                 list.Add(new Symbol

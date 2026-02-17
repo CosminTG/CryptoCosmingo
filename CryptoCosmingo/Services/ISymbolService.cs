@@ -4,7 +4,7 @@ namespace CryptoCosmingo.Services
 {
     public interface ISymbolService
     {
-        Task<List<SymbolDTO>> GetAllAsync();
+        Task<List<SymbolDTO>> GetCryptoSymbolAsync(string cryptosymbol);
         Task CreateAsync(CreateSymbolDTO dto);
     }
 }
