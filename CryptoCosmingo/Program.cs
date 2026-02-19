@@ -18,12 +18,14 @@ builder.Services.AddSingleton(new DatabaseConfig
     ConnectionString = connectionString
 });
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ISymbolRepository, SymbolRepository>();
 builder.Services.AddScoped<ISymbolService, SymbolService>();
 
+var app = builder.Build();
+
 DatabaseInit.CreateTables(connectionString);
 
-var app = builder.Build();
 app.MapControllers();
 app.Run();
