@@ -5,6 +5,7 @@ namespace CryptoCosmingo.Services
     public interface ISymbolService
     {
         Task<List<SymbolDTO>> GetCryptoSymbolAsync(string cryptosymbol);
-        Task CreateAsync(CreateSymbolDTO dto);
+        Task<SymbolListResponseDTO> GetExchangeInfoAsync();
+        //Task CreateAsync(CreateSymbolDTO dto);
     }
 }
